@@ -8,9 +8,13 @@ const getRoleId = async (roleName) => {
 }
 
 const flattenStudentPayload = (payload) => {
+  // This is needed so both insert and update works
+  const basicDetails = payload.basicDetails ?? payload;
+
   return {
-    name: payload.basicDetails.name,
-    email: payload.basicDetails.email,
+    userId: payload.userId,
+    name: basicDetails.name,
+    email: basicDetails.email,
     phone: payload.phone,
     gender: payload.gender,
     dob: payload.dob,
