@@ -27,8 +27,15 @@ const handleGetStudentDetail = asyncHandler(async (req, res) => {
 });
 
 const handleStudentStatus = asyncHandler(async (req, res) => {
-    //write your code
-
+    const payload = req.body;
+    const { id: userId } = req.params;
+    const { id: reviewerId } = req.user;
+    const message = await setStudentStatus({
+        ...payload,
+        userId,
+        reviewerId,
+    });
+    res.json(message);
 });
 
 module.exports = {
