@@ -7,6 +7,34 @@ const getRoleId = async (roleName) => {
     return rows[0].id;
 }
 
+const flattenStudentPayload = (payload) => {
+  // This is needed so both insert and update works
+  const basicDetails = payload.basicDetails ?? payload;
+
+  return {
+    userId: payload.userId,
+    name: basicDetails.name,
+    email: basicDetails.email,
+    phone: payload.phone,
+    gender: payload.gender,
+    dob: payload.dob,
+    class: payload.class,
+    section: payload.section,
+    roll: payload.roll,
+    fatherName: payload.fatherName,
+    fatherPhone: payload.fatherPhone,
+    motherName: payload.motherName,
+    motherPhone: payload.motherPhone,
+    guardianName: payload.guardianName,
+    guardianPhone: payload.guardianPhone,
+    relationOfGuardian: payload.relationOfGuardian,
+    currentAddress: payload.currentAddress,
+    permanentAddress: payload.permanentAddress,
+    admissionDate: payload.admissionDate,
+    systemAccess: payload.systemAccess,
+  };
+};
+
 const findAllStudents = async (payload) => {
     const { name, className, section, roll } = payload;
     let query = `
@@ -45,7 +73,8 @@ const findAllStudents = async (payload) => {
 
 const addOrUpdateStudent = async (payload) => {
     const query = "SELECT * FROM student_add_update($1)";
-    const queryParams = [payload];
+    const data = flattenStudentPayload(payload);
+    const queryParams = [data];
     const { rows } = await processDBRequest({ query, queryParams });
     return rows[0];
 }

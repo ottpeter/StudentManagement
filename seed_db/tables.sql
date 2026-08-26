@@ -372,8 +372,8 @@ BEGIN
         RETURN;
         END IF;
 
-        INSERT INTO users (name,email,role_id,created_dt,reporter_id)
-        VALUES (_name,_email,_roleId,now(),_reporterId) RETURNING id INTO _userId;
+        INSERT INTO users (name,email,role_id,created_dt,reporter_id,is_active)
+        VALUES (_name,_email,_roleId,now(),_reporterId,true) RETURNING id INTO _userId;
 
         INSERT INTO user_profiles
         (user_id,gender,phone,dob,admission_dt,class_name,section_name,roll,current_address,permanent_address,father_name,father_phone,mother_name,mother_phone,guardian_name,guardian_phone,relation_of_guardian)
