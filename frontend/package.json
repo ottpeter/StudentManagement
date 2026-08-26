@@ -58,6 +58,11 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.7"
   },
+  "husky": {
+    "hooks": {
+      "install": "husky install ../.husky"
+    }
+  },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [
       "prettier --write",
@@ -67,4 +72,5 @@
       "prettier --write"
     ]
   }
+  
 }
