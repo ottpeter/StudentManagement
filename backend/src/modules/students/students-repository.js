@@ -7,6 +7,30 @@ const getRoleId = async (roleName) => {
     return rows[0].id;
 }
 
+const flattenStudentPayload = (payload) => {
+  return {
+    name: payload.basicDetails.name,
+    email: payload.basicDetails.email,
+    phone: payload.phone,
+    gender: payload.gender,
+    dob: payload.dob,
+    class: payload.class,
+    section: payload.section,
+    roll: payload.roll,
+    fatherName: payload.fatherName,
+    fatherPhone: payload.fatherPhone,
+    motherName: payload.motherName,
+    motherPhone: payload.motherPhone,
+    guardianName: payload.guardianName,
+    guardianPhone: payload.guardianPhone,
+    relationOfGuardian: payload.relationOfGuardian,
+    currentAddress: payload.currentAddress,
+    permanentAddress: payload.permanentAddress,
+    admissionDate: payload.admissionDate,
+    systemAccess: payload.systemAccess,
+  };
+};
+
 const findAllStudents = async (payload) => {
     const { name, className, section, roll } = payload;
     let query = `
